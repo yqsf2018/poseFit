@@ -1,0 +1,9 @@
+#!/bin/bash
+dst=$1/fitPose
+mkdir -p $dst
+find *.h -type f -mmin -1200 -exec cp {} $dst \;
+find *.hpp -type f -mmin -1200 -exec cp {} $dst \;
+find *.cpp -type f -mmin -1200 -exec cp {} $dst \;
+cp CMakeLists.txt $dst
+cp notes.txt $dst
+cp backupSrc $dst

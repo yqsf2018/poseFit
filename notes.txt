@@ -1,0 +1,36 @@
+
+ file build/object_detection
+run -i=rtsp://admin:tnqCAM2in@192.168.1.108 --dTarget=person --thr=0.8 --f_thr=0.6 --target=2 yolo,cf_face
+
+--rtsp_host=192.168.1.108 --rtsp_user=mrview --rtsp_pswd=tnqVIEW32! --dTarget=chair --thr=0.8 --f_thr=0.6 --target=2 yolo,cf_face
+
+-i=/home/tinoq/ossVideo/20190704-200003.mp4 -d=25 --dTarget=person --thr=0.8 --f_thr=0.6 --target=2 yolo,cf_face
+
+BodyDetect Thread
+    Init
+        start a video session by submitting a video source to BE
+        get thread configuration from BE by agentID and camID, which is from command line
+        sync Frame#
+        Find a body
+            report to BE with rect and Frame#
+
+FaceDetect Thread
+    Init
+        start a video session by submitting a video source to BE
+        get thread configuration from BE by agentID and camID, which is from command line
+        sync Frame#
+        Find a face
+            report to BE with rect and Frame#    
+
+BackEnd (BE)
+    recevied body report:
+        add Obj
+        cam Avaliable:
+            update obj with zoom period and CamID
+            zoom in
+            start timer
+            timeout => zoom out
+
+    receive face report:
+        (camID, frame#) => ObjID
+        add face with camID => objID  
